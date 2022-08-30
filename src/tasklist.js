@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+const dotenv = require('dotenv');
 
 
 
@@ -6,6 +7,7 @@ function Tasklist() {
   const [taskText, setTaskText] = useState("");
   const [modText, setModText] = useState("");
   const [tasks, setTasks] = useState([]);
+
 
   useEffect(() => {
     getTasks()
@@ -25,7 +27,7 @@ function Tasklist() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task)
     };
-    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger2?subscription-key=9b31f930a78e43cc93303920fa31bd20', requestOptions)
+    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger2?subscription-key=' + process.env.REACT_APP_SUB_KEY, requestOptions)
         .then(response => response.json())
         .then(data => setTasks(tasks.concat(data)));
 
@@ -41,7 +43,7 @@ function Tasklist() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: item.id })
     };
-    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger4?subscription-key=9b31f930a78e43cc93303920fa31bd20', requestOptions)
+    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger4?subscription-key=' + process.env.REACT_APP_SUB_KEY, requestOptions)
 
     
     
@@ -79,7 +81,7 @@ function Tasklist() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item)
     };
-    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger5?subscription-key=9b31f930a78e43cc93303920fa31bd20', requestOptions)
+    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger5?subscription-key=' + process.env.REACT_APP_SUB_KEY, requestOptions)
 
     setTasks(newArray)
   }
@@ -100,14 +102,14 @@ function Tasklist() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item)
     };
-    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger5?subscription-key=9b31f930a78e43cc93303920fa31bd20', requestOptions)
+    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger5?subscription-key=' + process.env.REACT_APP_SUB_KEY, requestOptions)
 
     setTasks(newArray)
     console.log(newArray)
   }
 
   const getTasks = () => {
-    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger3?subscription-key=9b31f930a78e43cc93303920fa31bd20')
+    fetch('https://tasklistapim.azure-api.net/tasklistfunction111/HttpTrigger3?subscription-key=' + process.env.REACT_APP_SUB_KEY)
         .then(response => response.json())
         .then(data => {
           console.log(data)
